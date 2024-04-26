@@ -16,8 +16,7 @@ export const Container = styled.header`
     justify-content: space-between;
   }
 
-  > button {
-
+  > .sign-out {
     background-color: transparent;
 
     svg {
@@ -25,6 +24,17 @@ export const Container = styled.header`
     }
 
     @media (min-width: ${DEVICE_BREAKPOINTS.LG}) {
+      display: none;
+    }
+  }
+
+  > .sign-out-desktop {
+    background-color: transparent;
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+
+    @media (max-width: ${DEVICE_BREAKPOINTS.LG}) {
       display: none;
     }
   }

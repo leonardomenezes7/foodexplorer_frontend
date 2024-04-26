@@ -1,7 +1,10 @@
 import { FiX } from "react-icons/fi";
 import { Container } from "./styles";
+import { useAuth } from "../../hooks/auth";
 
 export function MobileMenu({ menuIsOpen, onCloseMenu }) {
+  const { signOut } = useAuth()
+
   return(
     <Container data-menu-is-open={menuIsOpen}>
       <header>
@@ -11,7 +14,12 @@ export function MobileMenu({ menuIsOpen, onCloseMenu }) {
       </header>
 
       <div>
-        <button className="sign-out">Sair</button>
+        <button 
+          className="sign-out"
+          onClick={signOut}
+        >
+          Sair
+        </button>
       </div>
     </Container>
   )

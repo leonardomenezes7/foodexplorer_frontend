@@ -7,11 +7,17 @@ import { RxExit } from "react-icons/rx";
 import logo from "../../assets/favicon.svg"
 import { GiHamburgerMenu } from "react-icons/gi";
 import { Link } from "react-router-dom";
+import { useAuth } from "../../hooks/auth";
 
 export function Header({ onOpenMenu }) {
+  const { signOut } = useAuth()
+
   return(
     <Container>
-      <button onClick={onOpenMenu}>
+      <button 
+        className="sign-out" 
+        onClick={onOpenMenu}
+      >
         <GiHamburgerMenu/>
       </button>
   
@@ -36,9 +42,12 @@ export function Header({ onOpenMenu }) {
         />
       </Link>
 
-      <a href="#">
+      <button 
+        className="sign-out-desktop"
+        onClick={signOut}
+      >
         <RxExit/>
-      </a>
+      </button>
     </Container>
   )
 }
