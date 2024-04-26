@@ -1,7 +1,7 @@
 import styled from "styled-components";
+import { DEVICE_BREAKPOINTS } from "../../styles/deviceBreakpoints";
 
 export const Container = styled.div`
-  height: 28.8rem;
   width: 19rem;
   background-color: ${({ theme }) => theme.colors.dark_300};
   border-radius: 0.5rem;
@@ -10,6 +10,7 @@ export const Container = styled.div`
   flex-direction: column;
   padding: 1rem 1.12rem;
   cursor: pointer;
+  height: 28.8rem;
 
 
   > .edit {
@@ -21,7 +22,7 @@ export const Container = styled.div`
     }
   }
 
-  > .details{
+  > .details {
     display: flex;
     flex-direction: column;
     word-break: break-all;
@@ -54,6 +55,33 @@ export const Container = styled.div`
       font-size: 2rem;
       font-family: "Poppins", sans-serif;
       font-weight: 400;
+    }
+  }
+
+  > div {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin: 1rem 0;
+   
+    > div {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    button {
+      width: 5.75rem;
+
+      @media (min-width: ${DEVICE_BREAKPOINTS.XS}) and (max-width: ${DEVICE_BREAKPOINTS.LG}) {
+        width: 20rem;
+      }
+    }
+
+    svg, p {
+      @media (min-width: ${DEVICE_BREAKPOINTS.XS}) and (max-width: ${DEVICE_BREAKPOINTS.LG}) {
+        display: none;
+      }
     }
   }
 `

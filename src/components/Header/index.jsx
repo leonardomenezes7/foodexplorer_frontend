@@ -8,9 +8,10 @@ import logo from "../../assets/favicon.svg"
 import { GiHamburgerMenu } from "react-icons/gi";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../hooks/auth";
+import { USER_ROLE } from "../../utils/roles";
 
-export function Header({ onOpenMenu }) {
-  const { signOut } = useAuth()
+export function Header({ onOpenMenu, children }) {
+  const { user, signOut } = useAuth()
 
   return(
     <Container>
@@ -27,20 +28,34 @@ export function Header({ onOpenMenu }) {
           food explorer
         </h4>
 
-        <span>admin</span>
+        {
+          user.role === USER_ROLE.ADMIN &&
+          <span>admin</span>
+        }
       </section>
      
-      <Input
-        placeholder="Busque por pratos ou ingredientes"
-        icon={CiSearch}
-      />
+      {children}
 
-      <Link to="/new">
-        <Button
-          title="Novo Prato"
-          // icon={PiReceipt}
-        />
-      </Link>
+      {
+        user.role === USER_ROLE.ADMIN &&
+        <Link to="/new">
+          <Button
+            title="Novo Prato"
+          />
+        </Link>
+      }
+
+      { 
+        user.role === USER_ROLE.CUSTOMER &&
+        <>
+          <Link to="#" className="edit">
+            <Button
+              title="Pedidos (0)"
+              icon={PiReceipt}
+            />
+          </Link>
+        </>
+      }
 
       <button 
         className="sign-out-desktop"

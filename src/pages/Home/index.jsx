@@ -7,52 +7,20 @@ import { register } from "swiper/element/bundle";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { useEffect, useState } from "react";
 import { MobileMenu } from "../../components/MobileMenu";
+import { FiSearch } from "react-icons/fi";
 
 register()
 import "swiper/css"
 import "swiper/css/navigation"
+import { api } from "../../services/api";
+import { Input } from "../../components/Input";
 
 export function Home() {
   const [slidesPerView, setSlidesPerView] = useState(4)
   const [menuIsOpen, setMenuIsOpen] = useState(false)
 
-  const data = [
-    {
-      id: "1", 
-      image: "https://github.com/leonardomenezes7.png", 
-      description: "descrição 1",
-      price: "R$ 8,00",
-      title: "Prato"
-    },
-    {
-      id: "2", 
-      image: "https://github.com/leonardomenezes7.png", 
-      description: "descrição 2",
-      price: "R$ 78,00",
-      title: "Prato"
-    },
-    {
-      id: "3", 
-      image: "https://github.com/leonardomenezes7.png", 
-      description: "descrição 3",
-      price: "R$ 7,00",
-      title: "Prato"
-    },
-    {
-      id: "4", 
-      image: "https://github.com/leonardomenezes7.png", 
-      description: "descrição 4saddddddddddddddddddddddddddddddddddddddddd",
-      price: "R$ 78,00",
-      title: "Prato"
-    },
-    {
-      id: "5", 
-      image: "https://github.com/leonardomenezes7.png", 
-      description: "descrição 5",
-      price: "R$ 78,00",
-      title: "Prato"
-    },
-  ]
+  const [dishes, setDishes] = useState({ snacks: [], drinks: [], desserts: [] })
+  const [search, setSearch] = useState("")
 
   useEffect(() => {
     function handleResize() {
@@ -90,11 +58,29 @@ export function Home() {
     }
   }, [])
 
+  useEffect(() => {
+    async function fetchDishes() {
+      const response = await api.get(`/dishes?name=${search}`)
+      const snacks = response.data.filter(dish => dish.category === "snack")
+      const drinks = response.data.filter(dish => dish.category === "drink")
+      const desserts = response.data.filter(dish => dish.category === "dessert")
+
+      setDishes({ snacks, drinks, desserts })
+    }
+
+    fetchDishes()
+  }, [search])
+
   return(
     <Container>
-      <Header 
-        onOpenMenu={() => setMenuIsOpen(true)}
-      />
+      <Header onOpenMenu={() => setMenuIsOpen(true)}>
+        <Input 
+          icon={FiSearch}
+          placeholder="Busque por pratos ou ingredientes"
+          onChange={e => setSearch(e.target.value)}
+        />
+      </Header>
+      
 
       <MobileMenu 
         menuIsOpen={menuIsOpen}
@@ -120,16 +106,16 @@ export function Home() {
               pagination={{ clickable: true }}
               navigation
             >
-              {data.map((dish) => (
-                <SwiperSlide key={dish.id}>
-                  <DishCard
-                    image={dish.image}
-                    title={dish.title}
-                    price={dish.price}
-                    description={dish.description}
-                  />
-                </SwiperSlide>
-              ))}
+              {
+                dishes.snacks.map(dish => (
+                  <SwiperSlide>
+                    <DishCard
+                      data={dish}
+                      key={dish.id}
+                    />
+                  </SwiperSlide>
+                ))
+              }
             </Swiper>
           </div>
         </Dishes>
@@ -143,16 +129,16 @@ export function Home() {
               pagination={{ clickable: true }}
               navigation
             >
-              {data.map((dish) => (
-                <SwiperSlide key={dish.id}>
-                  <DishCard
-                    image={dish.image}
-                    title={dish.title}
-                    price={dish.price}
-                    description={dish.description}
-                  />
-                </SwiperSlide>
-              ))}
+               {
+                dishes.desserts.map(dish => (
+                  <SwiperSlide>
+                    <DishCard
+                      data={dish}
+                      key={dish.id}
+                    />
+                  </SwiperSlide>
+                ))
+              }
             </Swiper>
           </div>
         </Dishes>
@@ -166,16 +152,16 @@ export function Home() {
               pagination={{ clickable: true }}
               navigation
             >
-              {data.map((dish) => (
-                <SwiperSlide key={dish.id}>
-                  <DishCard
-                    image={dish.image}
-                    title={dish.title}
-                    price={dish.price}
-                    description={dish.description}
-                  />
-                </SwiperSlide>
-              ))}
+               {
+                dishes.drinks.map(dish => (
+                  <SwiperSlide>
+                    <DishCard
+                      data={dish}
+                      key={dish.id}
+                    />
+                  </SwiperSlide>
+                ))
+              }
             </Swiper>
           </div>
         </Dishes>

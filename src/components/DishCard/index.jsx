@@ -1,24 +1,46 @@
 import { Container } from "./styles";
 import { PiPencilSimple } from "react-icons/pi";
-import dish from "../../assets/Dish.png"
 import { Link } from "react-router-dom";
+import { Button } from "../Button";
+import { FiMinus, FiPlus } from "react-icons/fi";
+import { USER_ROLE } from "../../utils/roles";
+import { useAuth } from "../../hooks/auth";
 
-export function DishCard({ title, price, image, description }) {
+export function DishCard({ data, ...rest }) {
+  const { user } = useAuth()
+
   return(
-    <Container>
-      <Link to="/edit" className="edit">
-        <PiPencilSimple/>
-      </Link>
+    <Container  {...rest}>
+      { 
+        user.role === USER_ROLE.ADMIN &&
+        <>
+          <Link to="/edit" className="edit">
+            <PiPencilSimple/>
+          </Link>
+        </>
+      }
 
       <Link to="/details" className="details">
-        <img src={image} alt="Imagem do prato" />
+        <img src={""} alt="Imagem do prato" />
 
-        <strong>{title}</strong>
+        <strong>{data.name}</strong>
 
-        <small>{description}</small>
+        <small>{data.description}</small>
 
-        <h4>{price}</h4>
+        <h4>{data.price}</h4>
       </Link>
+
+     { 
+      user.role === USER_ROLE.CUSTOMER &&
+      <div>
+        <div>
+          <FiMinus/>
+          <p>01</p>
+          <FiPlus/>
+        </div>
+        <Button title="Incluir"/>
+      </div>
+     }
     </Container>
   )
 }

@@ -1,0 +1,10 @@
+{data.map((dish) => (
+                <SwiperSlide key={dish.id}>
+                  <DishCard
+                    image={dish.image}
+                    title={dish.title}
+                    price={dish.price}
+                    description={dish.description}
+                  />
+                </SwiperSlide>
+              ))}

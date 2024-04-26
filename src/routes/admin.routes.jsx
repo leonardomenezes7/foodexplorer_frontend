@@ -4,7 +4,7 @@ import { New } from "../pages/New"
 import { Edit } from "../pages/Edit"
 import { Details } from "../pages/Details"
 
-export function AppRoutes() {
+export function AdminRoutes() {
   return(
     <Routes>
       <Route path="/" element={<Home />}/>
