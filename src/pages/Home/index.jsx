@@ -6,6 +6,7 @@ import { DishCard } from "../../components/DishCard";
 import { register } from "swiper/element/bundle";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { useEffect, useState } from "react";
+import { MobileMenu } from "../../components/MobileMenu";
 
 register()
 import "swiper/css"
@@ -13,6 +14,7 @@ import "swiper/css/navigation"
 
 export function Home() {
   const [slidesPerView, setSlidesPerView] = useState(4)
+  const [menuIsOpen, setMenuIsOpen] = useState(false)
 
   const data = [
     {
@@ -90,7 +92,14 @@ export function Home() {
 
   return(
     <Container>
-      <Header/>
+      <Header 
+        onOpenMenu={() => setMenuIsOpen(true)}
+      />
+
+      <MobileMenu 
+        menuIsOpen={menuIsOpen}
+        onCloseMenu={() => setMenuIsOpen(false)}
+      />
 
       <main>
         <div className="hero">

@@ -8,10 +8,12 @@ import logo from "../../assets/favicon.svg"
 import { GiHamburgerMenu } from "react-icons/gi";
 import { Link } from "react-router-dom";
 
-export function Header() {
+export function Header({ onOpenMenu }) {
   return(
     <Container>
-      <GiHamburgerMenu/>
+      <button onClick={onOpenMenu}>
+        <GiHamburgerMenu/>
+      </button>
   
       <section>
         <h4>

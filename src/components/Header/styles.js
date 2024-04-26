@@ -16,8 +16,13 @@ export const Container = styled.header`
     justify-content: space-between;
   }
 
-  > svg {
-    font-size: 2rem;
+  > button {
+
+    background-color: transparent;
+
+    svg {
+      font-size: 2rem;
+    }
 
     @media (min-width: ${DEVICE_BREAKPOINTS.LG}) {
       display: none;
