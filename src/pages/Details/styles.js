@@ -11,6 +11,14 @@ export const Container= styled.div`
   "content"
   "footer";
 
+  > header {
+    justify-content: space-between;
+
+    .sign-out-desktop {
+      display: none;
+    }
+  }
+
   > main {
     display: flex;
     flex-direction: column;
@@ -83,7 +91,7 @@ export const Items = styled.section`
   }
 
   > a {
-    width: 10rem;
+    width: 12rem;
     margin-bottom: 1rem;
 
     @media (min-width: ${DEVICE_BREAKPOINTS.XS}) and (max-width: ${DEVICE_BREAKPOINTS.LG}) {

@@ -12,13 +12,13 @@ export const Container = styled.div`
   cursor: pointer;
   height: 28.8rem;
 
-
   > .edit {
     align-self: flex-end;
     color: ${({ theme }) => theme.colors.light_300};
     
     svg {
       font-size: 1.5rem;
+      z-index: 3;
     }
   }
 

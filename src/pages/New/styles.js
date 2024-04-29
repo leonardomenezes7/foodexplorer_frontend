@@ -11,6 +11,14 @@ export const Container = styled.div`
   "content"
   "footer";
 
+  > header {
+    justify-content: space-between;
+
+     button {
+      display: none;
+    }
+  }
+
   > main {
     padding: 0 7.68rem;
     display: flex;

@@ -14,6 +14,7 @@ import "swiper/css"
 import "swiper/css/navigation"
 import { api } from "../../services/api";
 import { Input } from "../../components/Input";
+import { useNavigate } from "react-router-dom";
 
 export function Home() {
   const [slidesPerView, setSlidesPerView] = useState(4)
@@ -21,6 +22,12 @@ export function Home() {
 
   const [dishes, setDishes] = useState({ snacks: [], drinks: [], desserts: [] })
   const [search, setSearch] = useState("")
+
+  const navigate = useNavigate()
+
+  function handleDetails(id) {
+    navigate(`/details/${id}`)
+  }
 
   useEffect(() => {
     function handleResize() {
@@ -51,7 +58,14 @@ export function Home() {
 
     handleResize()
 
+    function handleSearch() {
+      if(setSearch) {
+        setSlidesPerView(1)
+      }
+    }
+
     window.addEventListener("resize", handleResize)
+    window.addEventListener("input", handleSearch)
 
     return () => {
       window.removeEventListener("resize", handleResize)
@@ -67,7 +81,7 @@ export function Home() {
 
       setDishes({ snacks, drinks, desserts })
     }
-
+    
     fetchDishes()
   }, [search])
 
@@ -76,7 +90,7 @@ export function Home() {
       <Header onOpenMenu={() => setMenuIsOpen(true)}>
         <Input 
           icon={FiSearch}
-          placeholder="Busque por pratos ou ingredientes"
+          placeholder="Busque por pratos"
           onChange={e => setSearch(e.target.value)}
         />
       </Header>
@@ -112,6 +126,7 @@ export function Home() {
                     <DishCard
                       data={dish}
                       key={dish.id}
+                      onClick={() => handleDetails(dish.id)}
                     />
                   </SwiperSlide>
                 ))
@@ -135,6 +150,7 @@ export function Home() {
                     <DishCard
                       data={dish}
                       key={dish.id}
+                      onClick={() => handleDetails(dish.id)}
                     />
                   </SwiperSlide>
                 ))
@@ -158,6 +174,7 @@ export function Home() {
                     <DishCard
                       data={dish}
                       key={dish.id}
+                      onClick={() => handleDetails(dish.id)}
                     />
                   </SwiperSlide>
                 ))

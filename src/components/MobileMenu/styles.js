@@ -36,6 +36,14 @@ export const Container = styled.div`
       font-family: "Poppins", sans-serif;
       margin: 2rem auto;
     }
+
+    > a {
+      color: ${({ theme }) => theme.colors.light_300};
+      font-size: 1.5rem;
+      border-bottom: 1px solid;
+      border-bottom-color: ${({ theme }) => theme.colors.dark_1000};
+      padding: 0.6rem;
+    }
   }
 
   > header {
