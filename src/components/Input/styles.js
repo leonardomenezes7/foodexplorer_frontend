@@ -6,8 +6,11 @@ export const Container = styled.div`
   border-radius: 0.5rem;
   display: flex;
   align-items: center;
-  
 
+  > svg {
+    margin-left: 1rem;
+  }
+  
   > input {
     padding: 0.75rem;
     background-color: transparent;

@@ -13,7 +13,21 @@ export default createGlobalStyle`
 
     @media (max-width: ${DEVICE_BREAKPOINTS.MD}) {
       font-size: 12px;
+
+      input, textarea, select {
+        font-size: 16px;
+      }
     }
+  }
+
+  ::-webkit-scrollbar {
+    background: none;
+    width: 0.5rem;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: ${({ theme }) => theme.colors.tints_cake_100};
+    border-radius: .8rem;
   }
 
   body {

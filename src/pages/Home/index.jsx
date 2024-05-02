@@ -111,6 +111,14 @@ export function Home() {
           </div>
         </div>
 
+        <div className="mobile-input-wrapper">
+          <Input
+            icon={FiSearch}
+            placeholder="Busque por pratos"
+            onChange={e => setSearch(e.target.value)}
+          />
+        </div>
+        
         <Dishes>
           <h3>Refeições</h3>
 
@@ -126,7 +134,6 @@ export function Home() {
                     <DishCard
                       data={dish}
                       key={dish.id}
-                      onClick={() => handleDetails(dish.id)}
                     />
                   </SwiperSlide>
                 ))

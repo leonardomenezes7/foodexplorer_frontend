@@ -12,16 +12,18 @@ export const Container = styled.div`
   cursor: pointer;
   height: 28.8rem;
 
-  > .edit {
+  svg {
+    font-size: 1.5rem;
+    z-index: 3;
     align-self: flex-end;
     color: ${({ theme }) => theme.colors.light_300};
-    
-    svg {
-      font-size: 1.5rem;
-      z-index: 3;
-    }
+    transition: 0.3s;
   }
 
+  svg:hover {
+    filter: brightness(0.8);
+  }
+  
   > .details {
     display: flex;
     flex-direction: column;

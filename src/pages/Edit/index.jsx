@@ -8,7 +8,7 @@ import { DishItem } from "../../components/DishItem";
 import { Button } from "../../components/Button";
 import { useEffect, useState } from "react";
 import { api } from "../../services/api";
-import { useAuth } from "../../hooks/auth";
+
 
 export function Edit() {
   const [data, setData] = useState(null)

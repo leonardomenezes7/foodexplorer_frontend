@@ -14,26 +14,32 @@ export function DishCard({ data, ...rest }) {
 
   const navigate = useNavigate()
 
+  function handleEdit() {
+    navigate(`/edit/${data.id}`)
+  }
+
+  function handleDetails() {
+    navigate(`/details/${data.id}`)
+  }
+
   return(
     <Container {...rest}>
       { 
         user.role === USER_ROLE.ADMIN &&
         <>
-          <Link to={`/edit/${data.id}`} className="edit">
-            <PiPencilSimple/>
-          </Link>
+            <PiPencilSimple onClick={handleEdit}/>
         </>
       }
 
-      <Link className="details">
-        <img src={imageURL} alt="Imagem do prato" />
+      <section className="details" onClick={handleDetails}>
+        <img src={imageURL} alt="Imagem do prato"/>
 
         <strong>{data.name}</strong>
 
         <small>{data.description}</small>
 
         <h4>{data.price}</h4>
-      </Link>
+      </section>
 
      { 
       user.role === USER_ROLE.CUSTOMER &&

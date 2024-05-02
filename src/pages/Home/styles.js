@@ -24,7 +24,7 @@ export const Container = styled.div`
     > .hero {
       display: flex;
       margin-top: 10.75rem;
-      margin-bottom: 3.8rem;
+      margin-bottom: 2rem;
       position: relative;
       background-color: ${({ theme }) => theme.colors.gradients_100};
       justify-content: flex-end;
@@ -72,6 +72,15 @@ export const Container = styled.div`
             display: none;
           }
         }
+      }
+    }
+
+    .mobile-input-wrapper {
+      display: none;
+      margin-bottom: 1rem;
+
+      @media (max-width: ${DEVICE_BREAKPOINTS.LG}) {
+        display: block;
       }
     }
   }
