@@ -8,13 +8,12 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { useEffect, useState } from "react";
 import { MobileMenu } from "../../components/MobileMenu";
 import { FiSearch } from "react-icons/fi";
-
 register()
 import "swiper/css"
 import "swiper/css/navigation"
 import { api } from "../../services/api";
 import { Input } from "../../components/Input";
-import { useNavigate } from "react-router-dom";
+
 
 export function Home() {
   const [slidesPerView, setSlidesPerView] = useState(4)
@@ -22,12 +21,6 @@ export function Home() {
 
   const [dishes, setDishes] = useState({ snacks: [], drinks: [], desserts: [] })
   const [search, setSearch] = useState("")
-
-  const navigate = useNavigate()
-
-  function handleDetails(id) {
-    navigate(`/details/${id}`)
-  }
 
   useEffect(() => {
     function handleResize() {
@@ -157,7 +150,6 @@ export function Home() {
                     <DishCard
                       data={dish}
                       key={dish.id}
-                      onClick={() => handleDetails(dish.id)}
                     />
                   </SwiperSlide>
                 ))
@@ -181,7 +173,6 @@ export function Home() {
                     <DishCard
                       data={dish}
                       key={dish.id}
-                      onClick={() => handleDetails(dish.id)}
                     />
                   </SwiperSlide>
                 ))
