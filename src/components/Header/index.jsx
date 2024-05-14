@@ -1,6 +1,4 @@
 import { Container } from "./styles";
-import{ Input } from "../Input"
-import { CiSearch } from "react-icons/ci";
 import { Button } from "../Button";
 import { PiReceipt } from "react-icons/pi";
 import { RxExit } from "react-icons/rx";

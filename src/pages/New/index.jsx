@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 
 export function New() {
   const [image, setImage] = useState(null)
+  const [fileName, setFileName] = useState("")
 
   const [name, setName] = useState("")
 
@@ -30,7 +31,18 @@ export function New() {
     navigate(-1)
   }
 
+  function handleChangeImage(event) {
+    const file = event.target.files[0]
+    
+    setImage(file)
+    setFileName(file.name)
+  }
+
   function handleAddIngredient() {
+    if(newIngredient === "") {
+      return
+    }
+
     setIngredients(prevState => [...prevState, newIngredient])
 
     setNewIngredient("")
@@ -104,10 +116,10 @@ export function New() {
               <span>Imagem do prato</span>
               <label htmlFor="">
                 <FiUpload/>
-                Selecione imagem
+                {fileName || "Selecione imagem"}
                 <input
                   type="file"
-                  onChange={e => setImage(e.target.files[0])}
+                  onChange={handleChangeImage}
                 />
               </label>
             </div>

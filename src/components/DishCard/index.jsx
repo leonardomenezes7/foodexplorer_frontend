@@ -6,8 +6,11 @@ import { FiMinus, FiPlus } from "react-icons/fi";
 import { USER_ROLE } from "../../utils/roles";
 import { useAuth } from "../../hooks/auth";
 import { api } from "../../services/api";
+import { useState } from "react";
 
 export function DishCard({ data, ...rest }) {
+  const [quantity, setQuantity] = useState(1)
+
   const { user } = useAuth() 
 
   const imageURL = `${api.defaults.baseURL}/files/${data.image}`
@@ -20,6 +23,22 @@ export function DishCard({ data, ...rest }) {
 
   function handleDetails() {
     navigate(`/details/${data.id}`)
+  }
+
+  function increaseQuantity() {
+    if(quantity >= 5) {
+      return
+    }
+
+    setQuantity(quantity + 1)
+  }
+
+  function decreaseQuantity() {
+    if(quantity === 1) {
+      return
+    }
+
+    setQuantity(quantity - 1)
   }
 
   return(
@@ -45,9 +64,9 @@ export function DishCard({ data, ...rest }) {
       user.role === USER_ROLE.CUSTOMER &&
       <div>
         <div>
-          <FiMinus/>
-          <p>01</p>
-          <FiPlus/>
+          <FiMinus onClick={decreaseQuantity}/>
+          <p>{quantity}</p>
+          <FiPlus onClick={increaseQuantity}/>
         </div>
         <Button title="Incluir"/>
       </div>

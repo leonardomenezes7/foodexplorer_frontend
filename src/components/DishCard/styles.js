@@ -65,6 +65,7 @@ export const Container = styled.div`
     gap: 1rem;
     justify-content: center;
     margin: 1rem 0;
+    align-items: center;
    
     > div {
       display: flex;

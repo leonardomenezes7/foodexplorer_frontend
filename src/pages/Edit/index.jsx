@@ -15,7 +15,6 @@ export function Edit() {
 
   const [image, setImage] = useState(null)
   const [fileName, setFileName] = useState("");
-  const [updatedImage, setUpdatedImage] = useState(null);
 
   const [name, setName] = useState("")
   const [category, setCategory] = useState("")
@@ -28,7 +27,7 @@ export function Edit() {
   const navigate = useNavigate()
 
   function handleAddIngredient() {
-    if(newIngredient ==="") {
+    if(newIngredient === "") {
       return
     }
 
@@ -50,7 +49,9 @@ export function Edit() {
         description: description
       }
 
-      await api.put(`/dishes/${params.id}`, editedDish)
+      if(ingredients.length === 0) {
+        return alert("Informe ingredientes para o prato.")
+      }
       
       if(fileName) {
         const formData = new FormData()
@@ -59,6 +60,7 @@ export function Edit() {
         await api.put(`/dishes/${params.id}`, formData)
       } 
 
+      await api.put(`/dishes/${params.id}`, editedDish)
       alert("Prato editado com sucesso!")
       navigate("/")
 
@@ -71,10 +73,9 @@ export function Edit() {
     }
   }
 
-  function handleChangeImage(e) {
-    const file = e.target.files[0]
+  function handleChangeImage(event) {
+    const file = event.target.files[0]
     setImage(file)
-    setUpdatedImage(file)
     setFileName(file.name)
   }
 
@@ -140,7 +141,7 @@ export function Edit() {
               <span>Imagem do prato</span>
               <label htmlFor="">
                 <FiUpload/>
-                Selecione imagem
+                {fileName || "Selecione imagem"}
                 <input
                   type="file"
                   onChange={handleChangeImage}
@@ -193,6 +194,7 @@ export function Edit() {
                   placeholder="Adicionar"
                   onChange={e => setNewIngredient(e.target.value)}
                   onClick={handleAddIngredient}
+                  value={newIngredient}
                 />
               </div>
             </div>
