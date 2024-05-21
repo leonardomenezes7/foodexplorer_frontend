@@ -25,7 +25,7 @@ export const Container= styled.div`
     padding: 0 7.68rem;
 
     @media (min-width: ${DEVICE_BREAKPOINTS.XS}) and (max-width: ${DEVICE_BREAKPOINTS.LG}) {
-      padding: 0 3.5rem;
+      padding: 0 1.75rem;
     }
 
     a {
@@ -51,6 +51,8 @@ export const Container= styled.div`
       img {
         height: 24rem;
         width: 24rem;
+        object-fit: cover;
+        border-radius: 50%;
 
         @media (min-width: ${DEVICE_BREAKPOINTS.XS}) and (max-width: ${DEVICE_BREAKPOINTS.LG}) {
           height: 20rem;
